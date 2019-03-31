@@ -1,0 +1,101 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Lavirint
+{
+    public class Node
+    {
+        public int markI, markJ;
+        private static int[,] movesTop = new int[,] { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
+        private static int[,] movesKralj = new int[,] { {1,1} , {-1,-1} };
+        
+
+        public Node(int markI, int markJ)
+        {
+            this.markI = markI;
+            this.markJ = markJ;
+        }
+
+        private bool validCoords(int markI, int markJ)
+        {
+            // TODO 2: Implementirati logiku za validna/nevalidna stanja iz zabranu prolaska kroz zidove
+            if (markI < 0 || markI >= Main.lavirint.brojVrsta)
+            {
+                return false;
+            }
+
+            if (markJ < 0 || markJ >= Main.lavirint.brojKolona)
+            {
+                return false;
+            }
+
+            if (Main.lavirint.polja[markI, markJ] == 1)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public List<Node> getLinkedNodes()
+        {
+            // TODO 1: Implementirati metodu tako da odredjuje dozvoljeno kretanje u lavirintu.
+            List<Node> nextNodes = new List<Node>();
+            State s = new State();
+
+            if (State.kutijaS == false)
+            {
+                for (int i = 0; i < Node.movesTop.GetLength(0); i++)
+                {
+                    int newI = Node.movesTop[i, 0] + this.markI;
+                    int newJ = Node.movesTop[i, 1] + this.markJ;
+                    if (this.validCoords(newI, newJ))
+                    {
+                        nextNodes.Add(new Node(newI, newJ));
+                    }
+
+                }
+
+            }
+
+            if (State.kutijaS == true)
+            {
+
+                {
+                    for (int i = 0; i < Node.movesKralj.GetLength(0); i++)
+                    {
+                        int newI = Node.movesKralj[i, 0] + this.markI;
+                        int newJ = Node.movesKralj[i, 1] + this.markJ;
+                        if (this.validCoords(newI, newJ))
+                        {
+                            nextNodes.Add(new Node(newI, newJ));
+                        }
+
+                    }
+
+
+                }
+            }
+
+            
+
+
+
+            return nextNodes;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            Node node = (Node)obj;
+            return this.markI == node.markI && this.markJ == node.markJ;
+        }
+
+       
+    }
+}
