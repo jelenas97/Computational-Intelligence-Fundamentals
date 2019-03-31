@@ -1,0 +1,10 @@
+Oblasti i vežbe iz predmeta Osnove računarske inteligencije.
+
+Obučavanje agenta da kupi određene elemente u lavirintu, da izbegava zidove u lavirintu,
+da beži od elemenata koji su idejno predstavljeni kao vatra,rupa itd. 
+Kretanje poput šahovskih figura sa određenim uslovima.
+
+Različiti algoritmi pretrage: A*, DepthFirstSearch, BreadthFirstSearch uz pomoć HashCoda.
+
+
+
